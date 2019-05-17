@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Item } from './stores/Item'
+import { Inventory } from '../src/stores/inventory'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+let market = new Inventory ()
+let shirt = new Item ("Shirt", 20, 3)
+market.items.push(shirt)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+
+ReactDOM.render(<App store={market}/>, document.getElementById('root'));
+
+
 serviceWorker.unregister();
