@@ -15,7 +15,7 @@ export class Inventory {
         item.quantity --
         if ( item.quantity === 0 )
         {
-            this.items.splice(0, 1)
+            this.items.splice(this.items.findIndex(i => i.name === name), 1)
         } 
     }
 

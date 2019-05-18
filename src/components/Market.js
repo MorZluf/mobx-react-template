@@ -5,8 +5,14 @@ import Item from './Item';
 
 @observer
 class Market extends Component {
+    constructor(){
+        super()
+        this.state ={
+            newItem : ""
+        }
+    }
 
-    handleChange = (e) => {
+    handleInput = (e) => {
         this.setState({
             newItem: e.target.value
         })
@@ -14,6 +20,13 @@ class Market extends Component {
 
     addItem = () => {
         this.props.store.addItem(this.state.newItem)
+        this.cleanInput()
+    }
+
+    cleanInput = () => {
+        this.setState({
+            newItem: ""
+        })
     }
 
     render() {
@@ -21,11 +34,13 @@ class Market extends Component {
 
         return (
             <div>
-                <input onChange={this.handleChange} />
+                <input id="item-input" onChange={this.handleInput} value={this.state.newItem} />
                 <button onClick={this.addItem}>Add</button>
-                {this.props.store.items.map((i, j) => <Item item={i}
-                    key={j} store={this.props.store} />
-                )}
+                <ul id="market-list">
+                    {this.props.store.items.map((i, j) => <Item item={i}
+                        key={j} store={this.props.store} />
+                    )}
+                </ul>
             </div>
         )
     }
