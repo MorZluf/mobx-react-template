@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, computed, action } from 'mobx'
 import { Item }  from './Item'
 
 
@@ -23,6 +23,14 @@ export class Inventory {
         let item = this.items.find(i => i.name === name)
         item.price = price
     }
+
+    @computed get numItems() {
+        let itemsCount = 0
+        this.items.forEach(i => itemsCount += i.quantity)
+        return itemsCount
+    }
+
+    
 
 }
 

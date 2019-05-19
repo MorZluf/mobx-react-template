@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
       <DevTools />
-    <Market store={this.props.store} />  
+    <Market />  
     </div>
   );
 }

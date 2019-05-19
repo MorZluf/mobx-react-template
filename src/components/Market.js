@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import Item from './Item';
 
 
+@inject("market")
 @observer
 class Market extends Component {
     constructor(){
@@ -19,7 +20,7 @@ class Market extends Component {
     }
 
     addItem = () => {
-        this.props.store.addItem(this.state.newItem)
+        this.props.market.addItem(this.state.newItem)
         this.cleanInput()
     }
 
@@ -37,10 +38,9 @@ class Market extends Component {
                 <input id="item-input" onChange={this.handleInput} value={this.state.newItem} />
                 <button onClick={this.addItem}>Add</button>
                 <ul id="market-list">
-                    {this.props.store.items.map((i, j) => <Item item={i}
-                        key={j} store={this.props.store} />
-                    )}
+                    {this.props.market.items.map((i, j) => <Item item={i} key={j} />)}
                 </ul>
+                <p>You have a total of {this.props.market.numItems} items in the store</p>
             </div>
         )
     }
